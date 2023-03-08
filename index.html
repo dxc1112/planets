@@ -3,6 +3,48 @@
  <title> Hello World</title>
 </head>
 <body>
-<h1> Hello </h1>	
+<h1> QC Samples​​
+​​​​Check missing phenotypes
+Remove individuals /samples with missing phenotype PLINK --prune
+
+Check call rates by sample
+Remove individuals that do not meet the call rate threshold/low genotyping
+(Call rate < 98%; MIND > 0.02; may use 95% depending on data ). PLINK --mind 0.02
+
+Check that sex matches as expected
+Run sex check to make sure sex in correctly identified based on heterozygosity rates. Remove or change individuals with incorrect or questionable sex info. PLINK --check-sex [ycount] 
+
+Check for duplicated samples
+Check for duplicate samples PLINK --genome
+
+Check relationships
+Remove people with incorrect relationships PLINK --genome rel-check
+
+Run concordance analyses with available GWAS and/or sequencing data PLINK --merge-mode 7 / --gehome
+ 
+ QC SNPs
+Check Call rates by SNP
+Remove SNPs with call rate less than 95%; the SNPS that failed missingness test (GENO > 0.05). (May need to use 98% threshold, depending on data)  PLINK --geno 0.06
+
+Check MAF
+Remove monomorphic SNPs PLINK --maf 0​.0001 --nonfounders
+
+Remove duplicate SNPs
+Remove duplicate SNPs; some locations have 2 or 3 different SNPs listed. This may be done by selecting the SNP with the lowest missing value rate after concordance checks verify that the SNPs have duplicate calls.  PLINK --list-duplicate-vars
+
+Verify all duplicate or multi-allelic SNPs are gone by looking at chrom and bp only
+
+Check HWE
+Remove SNPS (if indicated by study) that have MAF > 0.05 that fail the Hardy-Weinberg Equilibrium test at a specified significant threshold; HWE test ( p <= .000001 )       PLINK --hwe
+
+         Or.... flag SNPs and decide which ones to drop based on cluster plots. ​
+
+
+If indicated Check for differential missingness
+
+Remove markers which show differential missingness rates (above a given threshold) between cases and controls.
+
+       o First flag SNPs above the threshold
+       o Run single-SNP analyses with the SNPs in and then look at results to decide what SNPs need to be removed   PLINK --test-missing</h1>	
 </body>
 </html>
